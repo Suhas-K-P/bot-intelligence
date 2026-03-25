@@ -10,27 +10,25 @@ Upload any traffic CSV → get instant insights into:
 
 ---
 
+
 ## 📁 Project Structure
 
-
+```bash
 Bot_Intelligence/
 │
-├── app.py # Backend server (entry point)
-├── classifier.py # Rule engine + classification logic
-├── analytics.py # Aggregation helpers for charts
-├── requirements.txt # Dependencies
+├── app.py              # Backend server (entry point)
+├── classifier.py       # Rule engine + classification logic
+├── analytics.py        # Aggregation helpers for charts
+├── requirements.txt    # Dependencies
 │
 ├── templates/
-│ └── index.html # Frontend UI (Jinja2)
+│   └── index.html      # Frontend UI (Jinja2)
 │
 └── static/
-├── css/
-│ └── style.css # UI styling
-└── js/
-└── dashboard.js # Dashboard logic
-
-
----
+    ├── css/
+    │   └── style.css   # UI styling
+    └── js/
+        └── dashboard.js  # Dashboard logic
 
 ## ⚙️ Setup & Run
 
