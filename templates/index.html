@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  
+  <title>Bot Intelligence: Real-Time Detection & Threat Analysis Engine</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     UPLOAD SCREEN
+════════════════════════════════════════════ -->
+<div id="upload-screen">
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+
+  <div class="logo"> Threat Intelligence</div>
+  
+  
+  <h1 class="title">Bot Intelligence:<br>Real-Time Detection & Threat Analysis Engine</h1>
+  
+  <p class="subtitle">Drop your traffic CSV for instant bot intelligence</p>
+  <div class="drop-zone" id="drop-zone">
+    <div class="drop-icon">⬡</div>
+    <div class="drop-title">Drop your traffic CSV here</div>
+    <div class="drop-sub">Supports the generator script format — CSV with traffic columns</div>
+    <input type="file" id="file-input" accept=".csv"/>
+  </div>
+
+  <div id="file-info" style="display:none" class="file-info">
+    <div id="file-name"></div>
+    <div class="parse-stats">
+      <div class="parse-stat">Size: <span id="file-size-pre">—</span></div>
+    </div>
+  </div>
+
+  <div id="upload-error" class="upload-error" style="display:none"></div>
+
+  <button class="btn-analyze" id="btn-analyze" disabled onclick="startAnalysis()">
+    Analyze Traffic →
+  </button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     ANALYZING OVERLAY
+════════════════════════════════════════════ -->
+<div id="analyzing">
+  <div class="analyze-title">Scanning Traffic...</div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="analyze-log" id="analyze-log"></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     DASHBOARD
+════════════════════════════════════════════ -->
+<div id="dashboard">
+
+  <!-- Header -->
+  <div class="dash-header">
+    <div class="dash-logo"><em>Bot</em>Shield <span style="color:#4a5568;font-size:14px">// Intelligence Report</span></div>
+    <div class="dash-meta">
+      <span class="pulse"></span>
+      <span id="dash-filename" style="font-size:11px;color:#8892a4"></span>
+      <span class="badge badge-green">Analysis Complete</span>
+      <button class="btn-reset" onclick="resetDashboard()">↩ New File</button>
+    </div>
+  </div>
+
+  <!-- Stat Cards -->
+  <div class="stats-row" id="stats-row"></div>
+
+  <!-- Main Grid -->
+  <div class="main-grid">
+
+    <!-- Donut -->
+    <div class="panel">
+      <div class="panel-title">Traffic Breakdown</div>
+      <div class="donut-wrap">
+        <canvas id="donut-canvas" width="220" height="220"></canvas>
+        <div class="donut-center">
+          <div class="donut-total" id="donut-total">0</div>
+          <div class="donut-sub">TOTAL REQUESTS</div>
+        </div>
+      </div>
+      <div class="legend" id="donut-legend"></div>
+    </div>
+
+    <!-- AI Crawlers -->
+    <div class="panel">
+      <div class="panel-title">Top AI Crawlers</div>
+      <div style="overflow-x:auto">
+        <table class="ai-table">
+          <thead><tr>
+            <th>Crawler</th>
+            <th style="text-align:right">Requests</th>
+            <th>Volume</th>
+          </tr></thead>
+          <tbody id="ai-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /main-grid -->
+
+  <!-- Second Row -->
+  <div class="second-row">
+
+    <!-- Rules -->
+    <div class="panel">
+      <div class="panel-title">Top Detection Rules Triggered</div>
+      <div class="rules-grid" id="rules-grid"></div>
+    </div>
+
+    <!-- Risk Score -->
+    <div class="panel">
+      <div class="panel-title">Threat Risk Score</div>
+      <canvas id="risk-canvas" width="200" height="120" class="risk-arc"></canvas>
+      <div class="risk-val" id="risk-val" style="color:#ffb800">—</div>
+      <div class="risk-text" id="risk-text" style="color:#4a5568">Calculating...</div>
+      <div style="margin-top:24px;display:flex;flex-direction:column;gap:4px" id="risk-breakdown"></div>
+    </div>
+
+  </div>
+
+  <!-- Extra Charts Row -->
+  <div class="charts-row">
+
+    <!-- Timeline -->
+    <div class="panel">
+      <div class="panel-title">Traffic Timeline</div>
+      <div style="position:relative;height:200px"><canvas id="timeline-canvas"></canvas></div>
+    </div>
+
+    <!-- Fraud Distribution -->
+    <div class="panel">
+      <div class="panel-title">Fraud Score Distribution</div>
+      <div style="position:relative;height:200px"><canvas id="fraud-canvas"></canvas></div>
+    </div>
+
+  </div>
+
+  <!-- UA Breakdown + Mini Stats -->
+  <div class="mini-row">
+    <div class="panel">
+      <div class="panel-title">UA Type Breakdown</div>
+      <div style="position:relative;height:180px"><canvas id="ua-canvas"></canvas></div>
+    </div>
+    <div class="panel" id="summary-panel">
+      <div class="panel-title">Quick Summary</div>
+      <div id="summary-content"></div>
+    </div>
+  </div>
+
+  <!-- Flagged Rows Table -->
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-title">Flagged Traffic — Detailed View</div>
+
+    <div class="filter-row">
+      <button class="filter-btn active"  onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn"         onclick="setFilter('human',this)">Human</button>
+      <button class="filter-btn"         onclick="setFilter('bad',this)">Bad Bot</button>
+      <button class="filter-btn"         onclick="setFilter('ai',this)">AI Crawler</button>
+      <button class="filter-btn"         onclick="setFilter('crawler',this)">Crawler</button>
+      <input class="search-input" id="search-input" placeholder="Search IP / UA…" oninput="filterTable()"/>
+      <div class="row-count" id="row-count-label"></div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr>
+          <th>Classification</th><th>IP</th><th>User Agent</th>
+          <th>Fraud Score</th><th>Datacenter</th><th>VPN</th><th>TOR</th>
+          <th>UA Type</th><th>Missing Headers</th>
+        </tr></thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /dashboard -->
+
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
