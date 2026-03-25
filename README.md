@@ -1,39 +1,40 @@
-# BotShield — Python Edition 🛡️
+# Bot Intelligence: Real-Time Detection & Threat Analysis Engine 🚀
 
-A full-stack **Python + Flask** bot traffic classifier.
-Upload any traffic CSV → get instant bot intelligence.
+A full-stack **bot traffic analysis and threat intelligence system**.  
+Upload any traffic CSV → get instant insights into bot activity, fraud signals, and behavioral patterns.
 
 ---
 
-## Folder Structure
-
-```
-botshield_py/
-├── app.py              ← Flask server (entry point)
-├── classifier.py       ← Rule engine + classification logic
-├── analytics.py        ← Aggregation helpers for charts
-├── requirements.txt    ← pip dependencies
+Bot_Inteligence/
+├── app.py ← Backend server (entry point)
+├── classifier.py ← Rule engine + classification logic
+├── analytics.py ← Aggregation helpers for charts
+├── requirements.txt ← Dependencies
 ├── templates/
-│   └── index.html      ← Jinja2 HTML template
+│ └── index.html ← Frontend UI (Jinja2)
 └── static/
-    ├── css/
-    │   └── style.css   ← Dark cyber theme
-    └── js/
-        └── dashboard.js ← Chart.js frontend logic
-```
+├── css/
+│ └── style.css ← UI styling
+└── js/
+└── dashboard.js ← Dashboard logic
 
 ---
 
-## Setup & Run
+## ⚙️ Setup & Run
 
 ```bash
 # 1. Navigate to the folder
-cd botshield_py
+cd Bot_Inteligence
 
-# 2. (Optional) Create a virtual environment
+# 2. (Optional) Create virtual environment
 python -m venv venv
-source venv/bin/activate        # Linux / Mac
-venv\Scripts\activate.bat       # Windows
+
+# Activate:
+# Windows
+venv\Scripts\activate
+
+# Linux / Mac
+source venv/bin/activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
@@ -41,70 +42,65 @@ pip install -r requirements.txt
 # 4. Run the server
 python app.py
 
-# 5. Open your browser
-# → http://localhost:5000
-```
-
----
-
-## Generate Test Data
-
-Use your existing generator script:
-
-```bash
-pip install faker openpyxl
-python generate_traffic.py
-# Produces: final_traffic_8000.csv
-```
-
-Upload that CSV to BotShield.
-
----
-
-## Detection Rules
-
-| Rule | Signal |
-|---|---|
-| High Fraud Score | `fraud_score_ip > 60` |
-| Datacenter IP | `is_datacenter = True` (non-AI) |
-| VPN Detected | `is_vpn = True` |
-| TOR Exit Node | `is_tor = True` |
-| Bad User-Agent | curl, scrapy, Selenium, Playwright, etc. |
-| Missing Headers | `accept_language` empty |
-| No Session Cookie | `cookie1` is null/empty |
-| AI Crawler UA | GPTBot, ClaudeBot, Googlebot, etc. |
-| Headless WebGL | `webgl = Google SwiftShader` |
-| Linux Server Platform | `navigator_platform = Linux x86_64` + not legit |
-| Mismatched Fetch Headers | `sec_fetch_site/mode` inconsistency |
-| UTC Server Timezone | `timezone = UTC` + not legit |
-
----
-
-## Adding Custom Rules
-
-Open `classifier.py` and add to the `RULES` list:
-
-```python
-{
-    "id":   "my_rule",
-    "name": "My Custom Rule",
-    "desc": "Short description for the dashboard",
-    "fn":   lambda df: df["some_column"].fillna("").str.contains("pattern"),
-},
-```
-
-The frontend picks it up automatically — no other changes needed.
-
----
-
-## API Endpoint
-
-| Method | URL | Body | Response |
-|---|---|---|---|
-| POST | `/analyze` | `multipart/form-data` with `file` field | JSON with full analysis |
-
-You can also hit the API directly:
-```bash
+# 5. Open browser
+http://localhost:5000
+📊 Features
+Real-time bot detection from traffic logs
+Rule-based classification engine
+Fraud scoring and risk analysis
+AI crawler detection (GPTBot, Claude, etc.)
+TOR / VPN / Datacenter detection
+Interactive dashboard with charts
+CSV upload and analysis pipeline
+🧠 Detection Signals
+High fraud score
+Suspicious IP behavior
+Automation tools (Selenium, Playwright, etc.)
+Missing headers / abnormal requests
+Headless browser fingerprints
+AI crawler identification
+Network anomalies (TOR, VPN)
+🔌 API Endpoint
+Method	Endpoint	Description
+POST	/analyze	Upload CSV and get analysis
+Example:
 curl -X POST http://localhost:5000/analyze \
-     -F "file=@final_traffic_8000.csv"
-```
+     -F "file=@your_file.csv"
+➕ Adding Custom Rules
+
+Modify classifier.py:
+
+{
+    "id": "custom_rule",
+    "name": "Custom Rule",
+    "desc": "Description of rule",
+    "fn": lambda df: df["column"].str.contains("pattern", na=False),
+}
+🚀 Future Improvements
+FastAPI migration (high performance)
+Async processing for large datasets
+Database integration (PostgreSQL)
+Authentication system
+Cloud deployment (AWS / GCP)
+💡 Project Goal
+
+To build a production-grade bot detection and threat intelligence system
+similar to real-world security platforms.
+
+
+---
+
+# ⚠️ 3. About Folder Name (Important)
+
+You wrote:
+
+> Bot_Integillance ❌
+
+👉 You made a spelling mistake.
+
+---
+
+## ✅ Correct it to:
+
+```bash
+Bot_Intelligence
