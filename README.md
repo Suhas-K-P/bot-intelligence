@@ -76,31 +76,5 @@ Modify classifier.py:
     "desc": "Description of rule",
     "fn": lambda df: df["column"].str.contains("pattern", na=False),
 }
-🚀 Future Improvements
-FastAPI migration (high performance)
-Async processing for large datasets
-Database integration (PostgreSQL)
-Authentication system
-Cloud deployment (AWS / GCP)
-💡 Project Goal
-
-To build a production-grade bot detection and threat intelligence system
-similar to real-world security platforms.
 
 
----
-
-# ⚠️ 3. About Folder Name (Important)
-
-You wrote:
-
-> Bot_Integillance ❌
-
-👉 You made a spelling mistake.
-
----
-
-## ✅ Correct it to:
-
-```bash
-Bot_Intelligence
