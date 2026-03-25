@@ -1,74 +1,72 @@
-# Bot Intelligence: Real-Time Detection & Threat Analysis Engine 🚀
+🚀 Bot Intelligence: Real-Time Detection & Threat Analysis Engine
 
-A full-stack **bot traffic analysis and threat intelligence system**.  
-Upload any traffic CSV → get instant insights into bot activity, fraud signals, and behavioral patterns.
+A full-stack bot traffic analysis system that helps you detect malicious traffic, analyze behavior, and uncover fraud signals in real time.
 
----
+Upload any traffic CSV → get instant insights into:
 
-Bot_Inteligence/
-├── app.py ← Backend server (entry point)
-├── classifier.py ← Rule engine + classification logic
-├── analytics.py ← Aggregation helpers for charts
-├── requirements.txt ← Dependencies
+🤖 Bot activity
+⚠️ Fraud signals
+📊 Behavioral patterns
+📁 Project Structure
+Bot_Intelligence/
+│
+├── app.py              # 🚀 Backend server (entry point)
+├── classifier.py      # 🧠 Rule engine + classification logic
+├── analytics.py       # 📊 Aggregation helpers for charts
+├── requirements.txt   # 📦 Dependencies
+│
 ├── templates/
-│ └── index.html ← Frontend UI (Jinja2)
+│   └── index.html     # 🌐 Frontend UI (Jinja2)
+│
 └── static/
-├── css/
-│ └── style.css ← UI styling
-└── js/
-└── dashboard.js ← Dashboard logic
-
----
-
-## ⚙️ Setup & Run
-
-```bash
-# 1. Navigate to the folder
-cd Bot_Inteligence
-
-# 2. (Optional) Create virtual environment
+    ├── css/
+    │   └── style.css  # 🎨 UI styling
+    └── js/
+        └── dashboard.js  # ⚡ Dashboard logic
+⚙️ Setup & Run
+1️⃣ Clone & Navigate
+cd Bot_Intelligence
+2️⃣ (Optional) Create Virtual Environment
 python -m venv venv
-
-# Activate:
-# Windows
+Activate:
+Windows
 venv\Scripts\activate
-
-# Linux / Mac
+Linux / Mac
 source venv/bin/activate
-
-# 3. Install dependencies
+3️⃣ Install Dependencies
 pip install -r requirements.txt
-
-# 4. Run the server
+4️⃣ Run the Server
 python app.py
-
-# 5. Open browser
+5️⃣ Open in Browser
 http://localhost:5000
 📊 Features
-Real-time bot detection from traffic logs
-Rule-based classification engine
-Fraud scoring and risk analysis
-AI crawler detection (GPTBot, Claude, etc.)
-TOR / VPN / Datacenter detection
-Interactive dashboard with charts
-CSV upload and analysis pipeline
+⚡ Real-time bot detection from traffic logs
+🧠 Rule-based classification engine
+🔍 Fraud scoring & risk analysis
+🤖 AI crawler detection (GPTBot, Claude, etc.)
+🌐 TOR / VPN / Datacenter detection
+📈 Interactive dashboard with charts
+📂 CSV upload & analysis pipeline
 🧠 Detection Signals
-High fraud score
-Suspicious IP behavior
-Automation tools (Selenium, Playwright, etc.)
-Missing headers / abnormal requests
-Headless browser fingerprints
-AI crawler identification
-Network anomalies (TOR, VPN)
+
+Your system detects bots using:
+
+🚨 High fraud score patterns
+🌍 Suspicious IP behavior
+🤖 Automation tools (Selenium, Playwright)
+❌ Missing headers / abnormal requests
+🕵️ Headless browser fingerprints
+🤖 AI crawler identification
+🌐 Network anomalies (TOR, VPN)
 🔌 API Endpoint
 Method	Endpoint	Description
-POST	/analyze	Upload CSV and get analysis
+POST	/analyze	Upload CSV and get analysis results
 Example:
 curl -X POST http://localhost:5000/analyze \
      -F "file=@your_file.csv"
 ➕ Adding Custom Rules
 
-Modify classifier.py:
+You can extend detection logic by modifying classifier.py:
 
 {
     "id": "custom_rule",
@@ -76,5 +74,12 @@ Modify classifier.py:
     "desc": "Description of rule",
     "fn": lambda df: df["column"].str.contains("pattern", na=False),
 }
+💡 Future Improvements
+🔮 ML-based anomaly detection
+🌍 Geo-IP enrichment
+📡 Real-time streaming pipeline (Kafka / PubSub)
+🔐 Advanced fingerprinting
+🤝 Contributing
 
-
+Contributions are welcome!
+Feel free to open issues or submit pull requests 🚀
