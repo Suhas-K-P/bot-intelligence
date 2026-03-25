@@ -1,12 +1,13 @@
-
 """
 Bot Intelligence: Real-Time Detection & Threat Analysis Engine
-=================================
+=============================================================
+
 Run:
-    pip install flask pandas
+    pip install -r requirements.txt
     python app.py
 
-Then open: http://localhost:5000
+Then open:
+    http://localhost:5000 (default)
 """
 
 from flask import Flask, render_template, request, jsonify
