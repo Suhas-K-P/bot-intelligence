@@ -30,6 +30,8 @@ Bot_Intelligence/
     └── js/
         └── dashboard.js  # Dashboard logic
 
+
+```bash
 ## ⚙️ Setup & Run
 
 ### 1. Clone & Navigate
